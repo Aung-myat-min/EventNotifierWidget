@@ -2,9 +2,11 @@
   "name": "eventnotifierwidget",
   "version": "1.0.0",
   "description": "This is an electron window widget app. Displaying a widget of upcoming event.",
-  "main": "index.js",
+  "main": "dist/main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "npx electron .",
+    "build": "tsc",
+    "dev": "tsc && npx electron ."
   },
   "repository": {
     "type": "git",
@@ -15,5 +17,11 @@
   "bugs": {
     "url": "https://github.com/Aung-myat-min/EventNotifierWidget/issues"
   },
-  "homepage": "https://github.com/Aung-myat-min/EventNotifierWidget#readme"
+  "homepage": "https://github.com/Aung-myat-min/EventNotifierWidget#readme",
+  "devDependencies": {
+    "@types/electron": "^1.6.12",
+    "@types/node": "^22.13.0",
+    "electron": "^34.0.2",
+    "typescript": "^5.7.3"
+  }
 }
