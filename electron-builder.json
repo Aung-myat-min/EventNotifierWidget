@@ -1,6 +1,7 @@
 {
   "appId": "com.amm.event-notifier-widget",
   "files": ["dist-electron", "dist-react"],
+  "extraResources": ["dist-electron/preload.cjs"],
   "icon": "./ENW-logo.png",
   "mac": {
     "target": "dmg"

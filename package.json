@@ -1,5 +1,10 @@
 {
   "name": "eventnotifierwidget",
+  "author": {
+    "name": "Aung Myat Min",
+    "email": "koaungmyatmin0@gmail.com"
+  },
+  "description": "Event Notifier Widget",
   "private": true,
   "version": "0.0.0",
   "type": "module",
