@@ -1,0 +1,15 @@
+{
+  "appId": "com.amm.event-notifier-widget",
+  "files": ["dist-electron", "dist-react"],
+  "icon": "./ENW-logo.png",
+  "mac": {
+    "target": "dmg"
+  },
+  "linux": {
+    "target": "AppImage",
+    "category": "Utility"
+  },
+  "win": {
+    "target": ["portable", "msi"]
+  }
+}
