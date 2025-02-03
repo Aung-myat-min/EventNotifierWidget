@@ -1,6 +1,11 @@
-import { useState, useEffect } from "react";
-import { PlusIcon, PencilIcon, CheckIcon, TrashIcon } from "lucide-react";
-import { Dialog, DialogPanel, DialogTitle } from "@headlessui/react";
+import React, { useState, useEffect } from "react";
+import {
+  PlusIcon,
+  PencilIcon,
+  CheckIcon,
+  TrashIcon,
+  XIcon,
+} from "lucide-react";
 
 interface TodoEvent {
   id: number;
@@ -39,6 +44,31 @@ function CountdownTimer({ targetDate }: { targetDate: string }) {
   }, [targetDate]);
 
   return <div className="text-3xl font-bold text-blue-400">{timeLeft}</div>;
+}
+
+interface DialogProps {
+  isOpen: boolean;
+  onClose: () => void;
+  title: string;
+  children: React.ReactNode;
+}
+
+function Dialog({ isOpen, onClose, title, children }: DialogProps) {
+  if (!isOpen) return null;
+
+  return (
+    <div className="fixed inset-0 z-50 overflow-auto bg-black bg-opacity-50 flex">
+      <div className="relative p-8 bg-gray-800 w-full max-w-md m-auto flex-col flex rounded-lg">
+        <div className="flex justify-between items-center mb-4">
+          <h2 className="text-xl font-bold text-white">{title}</h2>
+          <button onClick={onClose} className="text-white">
+            <XIcon className="w-6 h-6" />
+          </button>
+        </div>
+        {children}
+      </div>
+    </div>
+  );
 }
 
 export default function App() {
@@ -192,46 +222,36 @@ export default function App() {
       </button>
 
       <Dialog
-        open={isDialogOpen}
+        isOpen={isDialogOpen}
         onClose={() => setIsDialogOpen(false)}
-        className="fixed inset-0 z-10 overflow-y-auto"
+        title={editingEvent ? "Edit Event" : "Add New Event"}
       >
-        <div className="flex items-center justify-center min-h-screen">
-          <DialogPanel className="fixed inset-0 bg-black opacity-30" />
-
-          <div className="relative bg-gray-800 rounded-lg max-w-md w-full mx-4 p-6">
-            <DialogTitle className="text-lg font-medium mb-4">
-              {editingEvent ? "Edit Event" : "Add New Event"}
-            </DialogTitle>
-
-            <input
-              type="text"
-              placeholder="Event Title"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              className="w-full px-3 py-2 bg-gray-700 text-white border border-gray-600 rounded-md mb-3"
-            />
-            <input
-              type="datetime-local"
-              value={date}
-              onChange={(e) => setDate(e.target.value)}
-              className="w-full px-3 py-2 bg-gray-700 text-white border border-gray-600 rounded-md mb-3"
-            />
-            <div className="flex justify-end space-x-3">
-              <button
-                onClick={() => setIsDialogOpen(false)}
-                className="px-4 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-700 transition-colors"
-              >
-                Cancel
-              </button>
-              <button
-                onClick={handleAddOrEditEvent}
-                className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors"
-              >
-                {editingEvent ? "Save Changes" : "Add Event"}
-              </button>
-            </div>
-          </div>
+        <input
+          type="text"
+          placeholder="Event Title"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          className="w-full px-3 py-2 bg-gray-700 text-white border border-gray-600 rounded-md mb-3"
+        />
+        <input
+          type="datetime-local"
+          value={date}
+          onChange={(e) => setDate(e.target.value)}
+          className="w-full px-3 py-2 bg-gray-700 text-white border border-gray-600 rounded-md mb-3"
+        />
+        <div className="flex justify-end space-x-3">
+          <button
+            onClick={() => setIsDialogOpen(false)}
+            className="px-4 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-700 transition-colors"
+          >
+            Cancel
+          </button>
+          <button
+            onClick={handleAddOrEditEvent}
+            className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors"
+          >
+            {editingEvent ? "Save Changes" : "Add Event"}
+          </button>
         </div>
       </Dialog>
     </div>
