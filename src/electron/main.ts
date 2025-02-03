@@ -2,8 +2,17 @@ import { app, BrowserWindow } from "electron";
 import path from "path";
 import { isDev } from "./utils.js";
 import { getPreloadPath } from "./pathResolver.js";
+import { initDB } from "./db/db.js";
 
-app.on("ready", () => {
+//TODO: Make a schema
+//TODO: Configure the database
+//TODO: Define functions for preload
+//TODO: IPC communication
+//TODO: Setup UI
+
+app.on("ready", async () => {
+  await initDB();
+
   const mainWindow = new BrowserWindow({
     webPreferences: {
       preload: getPreloadPath(),
