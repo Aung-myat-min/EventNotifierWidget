@@ -20,4 +20,7 @@ electron.contextBridge.exposeInMainWorld("electron", {
 
   // Mark an event as completed
   completeEvent: async (id: number) => ipcRenderer.invoke("completeEvent", id),
+
+  // Delete an event
+  deleteEvent: (id: number) => ipcRenderer.invoke("deleteEvent", id),
 });

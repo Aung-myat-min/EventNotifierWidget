@@ -16,5 +16,6 @@ interface Window {
       completed: boolean
     ) => Promise<void>;
     completeEvent: (id: number) => Promise<void>;
+    deleteEvent: (id: number) => Promise<void>;
   };
 }

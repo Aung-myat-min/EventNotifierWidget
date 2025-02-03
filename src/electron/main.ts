@@ -8,6 +8,7 @@ import {
   addEvent,
   editEvent,
   completeEvent,
+  deleteEvent,
 } from "./db/db.js";
 
 app.whenReady().then(async () => {
@@ -28,10 +29,12 @@ app.whenReady().then(async () => {
 
 // Handle IPC calls
 ipcMain.handle("getAllEvents", async () => {
+  console.log("Getting all events");
   return await getAllEvents();
 });
 
 ipcMain.handle("addEvent", async (_event, title: string, date: string) => {
+  console.log("Adding event");
   return await addEvent(title, date);
 });
 
@@ -44,10 +47,17 @@ ipcMain.handle(
     date: string,
     completed: boolean
   ) => {
+    console.log("Editing event");
     return await editEvent(id, title, date, completed);
   }
 );
 
 ipcMain.handle("completeEvent", async (_event, id: number) => {
+  console.log("Completing event");
   return await completeEvent(id);
+});
+
+ipcMain.handle("deleteEvent", async (_event, id: number) => {
+  console.log("Deleting event");
+  return await deleteEvent(id);
 });

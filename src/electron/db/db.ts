@@ -57,3 +57,8 @@ export async function addEvent(title: string, date: string) {
 export async function completeEvent(id: number) {
   return await db.run("UPDATE events SET completed = 1 WHERE id = ?", [id]);
 }
+
+// Function to delete an event by ID
+export async function deleteEvent(id: number) {
+  return await db.run("DELETE FROM events WHERE id = ?", [id]);
+}
