@@ -25,9 +25,24 @@ export async function initDB() {
   console.log("Database initialized.");
 }
 
-// Function to get all events
-export async function getEvents() {
-  return await db.all("SELECT * FROM events ORDER BY date ASC");
+// Function to get all **incomplete** events sorted by date
+export async function getAllEvents(): Promise<TodoEvent[]> {
+  return await db.all(
+    "SELECT * FROM events WHERE completed = 0 ORDER BY date ASC"
+  );
+}
+
+// Function to edit an event by ID
+export async function editEvent(
+  id: number,
+  title: string,
+  date: string,
+  completed: boolean
+) {
+  return await db.run(
+    "UPDATE events SET title = ?, date = ?, completed = ? WHERE id = ?",
+    [title, date, completed ? 1 : 0, id]
+  );
 }
 
 // Function to add a new event

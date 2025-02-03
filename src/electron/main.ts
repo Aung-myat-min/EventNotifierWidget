@@ -4,9 +4,6 @@ import { isDev } from "./utils.js";
 import { getPreloadPath } from "./pathResolver.js";
 import { initDB } from "./db/db.js";
 
-//TODO: Make a schema
-//TODO: Configure the database
-//TODO: Define functions for preload
 //TODO: IPC communication
 //TODO: Setup UI
 
